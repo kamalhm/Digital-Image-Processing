@@ -1,0 +1,102 @@
+{% extends "layout.html" %} {% block body %}
+<div class="jumbotron jumbotron-fluid text-center">
+    <h1 class="display-1">Menu</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Umum</h2>
+                <div class="d-flex flex-wrap">
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('normal') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Normal</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('grayscale') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Grayscale</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('zoomin') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Zoom In</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('zoomout') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Zoom Out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Pergeseran</h2>
+                <div class="d-flex flex-wrap">
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('move_left') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Geser Kiri</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('move_right') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Geser Kanan</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('move_up') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Geser Atas</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('move_down') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Geser Bawah</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Penerangan</h2>
+                <div class="d-flex flex-wrap">
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('brightness_multiplication') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Terang (dengan Perkalian)</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('brightness_division') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Gelap (dengan Pembagian)</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('brightness_addition') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Terang (dengan Penjumlahan)</button>
+                        </form>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight">
+                        <form id="" action="{{ url_for('brightness_substraction') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Gelap (dengan Pengurangan)</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Before</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/img_default.jpg') }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>After</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+</style>
+{% endblock %}
