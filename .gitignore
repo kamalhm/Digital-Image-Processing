@@ -11,7 +11,7 @@
 ## Image files
 *.jpeg
 *.jpg
-
+*.png
 ### Linux ###
 *~
 
