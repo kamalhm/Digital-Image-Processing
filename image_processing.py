@@ -1,10 +1,11 @@
 import numpy as np
 from PIL import Image
-import matplotlib
-matplotlib.use('Agg')
+# import matplotlib
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from scipy import stats
 import math
+from collections import Counter
+from pylab import savefig
 
 
 def grayscale():
@@ -206,3 +207,21 @@ def brightness_division():
     new_arr = img_arr.astype('uint8')
     new_img = Image.fromarray(new_arr)
     new_img.save("static/img/img_darkened_division.jpg")
+
+
+def histogram_rgb():
+    img = Image.open("static/img/img_default.jpg")
+    img_arr = np.asarray(img)
+    r = img_arr[:, :, 0].flatten()
+    g = img_arr[:, :, 1].flatten()
+    b = img_arr[:, :, 2].flatten()
+    data_r = Counter(r)
+    data_g = Counter(g)
+    data_b = Counter(b)
+    data_rgb = [data_r, data_g, data_b]
+    warna = ['red', 'green', 'blue']
+    data_hist = list(zip(warna, data_rgb))
+    for data in data_hist:
+        plt.bar(list(data[1].keys()), data[1].values(), color=f'{data[0]}')
+        plt.savefig(f'static/img/{data[0]}_histogram.jpg', dpi=300)
+        plt.clf()
