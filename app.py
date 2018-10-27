@@ -156,5 +156,12 @@ def brightness_division():
     return render_template("uploaded.html", file_path="img/img_darkened_division.jpg")
 
 
+@app.route("/histogram_rgb", methods=["POST"])
+@nocache
+def histogram_rgb():
+    image_processing.histogram_rgb()
+    return render_template("histogram.html", file_paths=["img/red_histogram.jpg", "img/green_histogram.jpg", "img/blue_histogram.jpg"])
+
+
 if __name__ == '__main__':
     app.run(debug=True)

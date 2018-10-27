@@ -76,11 +76,6 @@
                             <button type="submit" class="btn btn-primary">Gelap (dengan Pengurangan)</button>
                         </form>
                     </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('histogram_rgb') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">RGB Histogram</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -95,7 +90,15 @@
                     </div>
                     <div class="col-md-6">
                         <h3>After</h3>
-                        <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[0]) }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>After</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[1]) }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>After</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[2]) }}" alt="image here">
                     </div>
                 </div>
             </div>
