@@ -160,9 +160,10 @@ def brightness_division():
 @nocache
 def histogram_rgb():
     image_processing.histogram_rgb()
-    if image_processing.is_grey_scale("/static/img/img_default.jpg"):
-        return render_template("histogram.html", file_paths=[""])
-    return render_template("histogram.html", file_paths=["img/red_histogram.jpg", "img/green_histogram.jpg", "img/blue_histogram.jpg", "img/grey_histogram.jpg"])
+    if image_processing.is_grey_scale("static/img/img_default.jpg"):
+        return render_template("histogram.html", file_paths=["img/grey_histogram.jpg"])
+    else:
+        return render_template("histogram.html", file_paths=["img/red_histogram.jpg", "img/green_histogram.jpg", "img/blue_histogram.jpg"])
 
 
 if __name__ == '__main__':
