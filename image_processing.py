@@ -30,6 +30,17 @@ def grayscale():
     img_new.save("static/img/img_grayscaled.jpg")
 
 
+def is_grey_scale(img_path):
+    im = Image.open(img_path).convert('RGB')
+    w, h = im.size
+    for i in range(w):
+        for j in range(h):
+            r, g, b = im.getpixel((i, j))
+            if r != g != b:
+                return False
+    return True
+
+
 def zoomin():
     img = Image.open("static/img/img_default.jpg")
     img = img.convert("RGB")
@@ -210,18 +221,26 @@ def brightness_division():
 
 
 def histogram_rgb():
-    img = Image.open("static/img/img_default.jpg")
+    img_path = "static/img/img_default.jpg"
+    img = Image.open(img_path)
     img_arr = np.asarray(img)
-    r = img_arr[:, :, 0].flatten()
-    g = img_arr[:, :, 1].flatten()
-    b = img_arr[:, :, 2].flatten()
-    data_r = Counter(r)
-    data_g = Counter(g)
-    data_b = Counter(b)
-    data_rgb = [data_r, data_g, data_b]
-    warna = ['red', 'green', 'blue']
-    data_hist = list(zip(warna, data_rgb))
-    for data in data_hist:
-        plt.bar(list(data[1].keys()), data[1].values(), color=f'{data[0]}')
-        plt.savefig(f'static/img/{data[0]}_histogram.jpg', dpi=300)
+    if is_grey_scale(img_path):
+        g = img_arr[:, :, 0].flatten()
+        data_g = Counter(g)
+        plt.bar(list(data_g.keys()), data_g.values(), color='black')
+        plt.savefig(f'static/img/grey_histogram.jpg', dpi=300)
         plt.clf()
+    else:
+        r = img_arr[:, :, 0].flatten()
+        g = img_arr[:, :, 1].flatten()
+        b = img_arr[:, :, 2].flatten()
+        data_r = Counter(r)
+        data_g = Counter(g)
+        data_b = Counter(b)
+        data_rgb = [data_r, data_g, data_b]
+        warna = ['red', 'green', 'blue']
+        data_hist = list(zip(warna, data_rgb))
+        for data in data_hist:
+            plt.bar(list(data[1].keys()), data[1].values(), color=f'{data[0]}')
+            plt.savefig(f'static/img/{data[0]}_histogram.jpg', dpi=300)
+            plt.clf()
