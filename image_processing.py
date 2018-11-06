@@ -1,11 +1,10 @@
 import numpy as np
 from PIL import Image
-# import matplotlib
-# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import math
 from collections import Counter
 from pylab import savefig
+import cv2
 
 
 def grayscale():
@@ -244,3 +243,30 @@ def histogram_rgb():
             plt.bar(list(data[1].keys()), data[1].values(), color=f'{data[0]}')
             plt.savefig(f'static/img/{data[0]}_histogram.jpg', dpi=300)
             plt.clf()
+
+
+def df(img):  # to make a histogram (count distribution frequency)
+    values = [0]*256
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            values[img[i, j]] += 1
+    return values
+
+
+def cdf(hist):  # cumulative distribution frequency
+    cdf = [0] * len(hist)  # len(hist) is 256
+    cdf[0] = hist[0]
+    for i in range(1, len(hist)):
+        cdf[i] = cdf[i-1]+hist[i]
+    # Now we normalize the histogram
+    # What your function h was doing before
+    cdf = [ele*255/cdf[-1] for ele in cdf]
+    return cdf
+
+
+def histogram_equalizer():
+    img = cv2.imread('static\img\img_default.jpg', 0)
+    my_cdf = cdf(df(img))
+    # use linear interpolation of cdf to find new pixel values. Scipy alternative exists
+    image_equalized = np.interp(img, range(0, 256), my_cdf)
+    cv2.imwrite('static\img\img_equalized.jpg', image_equalized)

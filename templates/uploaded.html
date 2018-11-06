@@ -86,6 +86,16 @@
                     </form>
                 </div>
             </div>
+            <div class="col-md-4">
+                <h2>Pemrosesan Gambar</h2>
+                <div class="p-2 flex-fill bd-highlight">
+                    <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
+                    </form>
+                    *Histogram Equalizer melakukan normalisasi histogram dengan menggunakan cdf(cumulative density
+                    function)
+                </div>
+            </div>
         </div>
     </div>
     <div class="container-fluid">

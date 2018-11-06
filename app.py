@@ -156,6 +156,13 @@ def brightness_division():
     return render_template("uploaded.html", file_path="img/img_darkened_division.jpg")
 
 
+@app.route("/histogram_equalizer", methods=["POST"])
+@nocache
+def histogram_equalizer():
+    image_processing.histogram_equalizer()
+    return render_template("uploaded.html", file_path="img/img_equalized.jpg")
+
+
 @app.route("/histogram_rgb", methods=["POST"])
 @nocache
 def histogram_rgb():
