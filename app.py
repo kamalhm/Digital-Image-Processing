@@ -162,6 +162,24 @@ def histogram_equalizer():
     image_processing.histogram_equalizer()
     return render_template("uploaded.html", file_path="img/img_equalized.jpg")
 
+@app.route("/edge_detection", methods=["POST"])
+@nocache
+def edge_detection():
+    image_processing.edge_detection()
+    return render_template("uploaded.html", file_path="img/img_edge_detected.jpg")
+
+@app.route("/blur", methods=["POST"])
+@nocache
+def blur():
+    image_processing.blur()
+    return render_template("uploaded.html", file_path="img/img_blurred.jpg")
+
+@app.route("/sharpening", methods=["POST"])
+@nocache
+def sharpening():
+    image_processing.sharpening()
+    return render_template("uploaded.html", file_path="img/img_sharpened.jpg")
+
 
 @app.route("/histogram_rgb", methods=["POST"])
 @nocache

@@ -92,8 +92,26 @@
                     <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
                         <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
                     </form>
-                    *Histogram Equalizer melakukan normalisasi histogram dengan menggunakan cdf(cumulative density
+                    *melakukan normalisasi histogram dengan menggunakan cdf(cumulative density
                     function)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Filter Gambar</h2>
+                <div class="p-2 flex-fill bd-highlight">
+                    <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-primary">Edge Detection</button>
+                    </form>
+                </div>
+                <div class="p-2 flex-fill bd-highlight">
+                    <form id="" action="{{ url_for('blur') }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-primary">Blur</button>
+                    </form>
+                </div>
+                <div class="p-2 flex-fill bd-highlight">
+                    <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-primary">Sharpening</button>
+                    </form>
                 </div>
             </div>
         </div>
