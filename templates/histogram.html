@@ -92,26 +92,30 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h3>Before</h3>
-                        <img class="img-fluid" src="{{ url_for('static', filename='img/img_default.jpg') }}" alt="image here">
-                    </div>
                     {% if file_paths[2] %}
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <h3>Image RGB</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/img_now.jpg') }}" alt="image here">
+                    </div>
+                    <div class="col-md-4">
                         <h3>Red Histogram</h3>
                         <img class="img-fluid" src="{{ url_for('static', filename=file_paths[0]) }}" alt="image here">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h3>Green Histogram</h3>
                         <img class="img-fluid" src="{{ url_for('static', filename=file_paths[1]) }}" alt="image here">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h3>Blue Histogram</h3>
                         <img class="img-fluid" src="{{ url_for('static', filename=file_paths[2]) }}" alt="image here">
                     </div>
                     {% else %}
                     <div class="col-md-6">
-                        <h3>After</h3>
+                        <h3>Image Greyscaled</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/img_now.jpg') }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Black Histogram</h3>
                         <img class="img-fluid" src="{{ url_for('static', filename=file_paths[0]) }}" alt="image here">
                     </div>
                     {% endif %}
