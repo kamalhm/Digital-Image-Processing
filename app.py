@@ -7,6 +7,7 @@ from datetime import datetime
 from functools import wraps, update_wrapper
 
 app = Flask(__name__)
+
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -19,6 +20,7 @@ def nocache(view):
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '-1'
         return response
+
     return update_wrapper(no_cache, view)
 
 
@@ -57,13 +59,18 @@ def upload():
             os.makedirs(target)
         else:
             os.mkdir(target)
+
     for file in request.files.getlist("file"):
+        print(file)
         if file.filename == "":
             return render_template("no_img.html", file_path="img/no_image_selected.gif")
+
+        # filename = "img_default." + file.filename.split(".")[-1]
         filename = "img_default.jpg"
         destination = "/".join([target, filename])
         print(destination)
         file.save("static/img/img_default.jpg")
+
         return render_template("uploaded.html", file_path="img/img_default.jpg")
 
 
@@ -148,6 +155,44 @@ def brightness_multiplication():
 def brightness_division():
     image_processing.brightness_division()
     return render_template("uploaded.html", file_path="img/img_darkened_division.jpg")
+
+
+@app.route("/histogram_equalizer", methods=["POST"])
+@nocache
+def histogram_equalizer():
+    image_processing.histogram_equalizer()
+    return render_template("uploaded.html", file_path="img/img_equalized.jpg")
+
+
+@app.route("/edge_detection", methods=["POST"])
+@nocache
+def edge_detection():
+    image_processing.edge_detection()
+    return render_template("uploaded.html", file_path="img/img_edge_detected.jpg")
+
+
+@app.route("/blur", methods=["POST"])
+@nocache
+def blur():
+    image_processing.blur()
+    return render_template("uploaded.html", file_path="img/img_blurred.jpg")
+
+
+@app.route("/sharpening", methods=["POST"])
+@nocache
+def sharpening():
+    image_processing.sharpening()
+    return render_template("uploaded.html", file_path="img/img_sharpened.jpg")
+
+
+@app.route("/histogram_rgb", methods=["POST"])
+@nocache
+def histogram_rgb():
+    image_processing.histogram_rgb()
+    if image_processing.is_grey_scale("static/img/img_default.jpg"):
+        return render_template("histogram.html", file_paths=["img/grey_histogram.jpg"])
+    else:
+        return render_template("histogram.html", file_paths=["img/red_histogram.jpg", "img/green_histogram.jpg", "img/blue_histogram.jpg"])
 
 
 if __name__ == '__main__':

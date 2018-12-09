@@ -86,34 +86,6 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-4">
-                <h2>Pemrosesan Gambar</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
-                    </form>
-                    *melakukan normalisasi histogram dengan menggunakan cdf(cumulative density
-                    function)
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>Filter Gambar</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Edge Detection</button>
-                    </form>
-                </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('blur') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Blur</button>
-                    </form>
-                </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Sharpening</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container-fluid">
@@ -124,10 +96,25 @@
                         <h3>Before</h3>
                         <img class="img-fluid" src="{{ url_for('static', filename='img/img_default.jpg') }}" alt="image here">
                     </div>
+                    {% if file_paths[2] %}
+                    <div class="col-md-6">
+                        <h3>Red Histogram</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[0]) }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Green Histogram</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[1]) }}" alt="image here">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Blue Histogram</h3>
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[2]) }}" alt="image here">
+                    </div>
+                    {% else %}
                     <div class="col-md-6">
                         <h3>After</h3>
-                        <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
+                        <img class="img-fluid" src="{{ url_for('static', filename=file_paths[0]) }}" alt="image here">
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
