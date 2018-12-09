@@ -1,10 +1,10 @@
+import math
+from scipy import stats
+import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from scipy import stats
-import math
 
 
 def grayscale():

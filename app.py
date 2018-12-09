@@ -7,7 +7,6 @@ from datetime import datetime
 from functools import wraps, update_wrapper
 
 app = Flask(__name__)
-
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -20,7 +19,6 @@ def nocache(view):
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '-1'
         return response
-
     return update_wrapper(no_cache, view)
 
 
@@ -54,22 +52,18 @@ def add_header(r):
 @nocache
 def upload():
     target = os.path.join(APP_ROOT, "static/img")
-    print(target)
-
     if not os.path.isdir(target):
-        os.mkdir(target)
-
+        if os.name == 'nt':
+            os.makedirs(target)
+        else:
+            os.mkdir(target)
     for file in request.files.getlist("file"):
-        print(file)
         if file.filename == "":
             return render_template("no_img.html", file_path="img/no_image_selected.gif")
-
-        # filename = "img_default." + file.filename.split(".")[-1]
         filename = "img_default.jpg"
         destination = "/".join([target, filename])
         print(destination)
         file.save("static/img/img_default.jpg")
-
         return render_template("uploaded.html", file_path="img/img_default.jpg")
 
 
