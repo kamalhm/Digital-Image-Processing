@@ -6,6 +6,7 @@
             <div class="col-md-4">
                 <h2>Umum</h2>
                 <div class="d-flex flex-wrap">
+                    
                     <div class="p-2 flex-fill bd-highlight">
                         <form id="" action="{{ url_for('normal') }}" method="POST" enctype="multipart/form-data">
                             <button type="submit" class="btn btn-primary">Normal</button>
@@ -57,43 +58,69 @@
                 <h2>Penerangan</h2>
                 <div class="d-flex flex-wrap">
                     <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('brightness_multiplication') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Terang (dengan Perkalian)</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('brightness_division') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Gelap (dengan Pembagian)</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('brightness_addition') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Terang (dengan Penjumlahan)</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('brightness_substraction') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Gelap (dengan Pengurangan)</button>
-                        </form>
+                        <div class="p-2 flex-fill bd-highlight">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            <form id="" action="{{ url_for('brightness_multiplication') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                <button type="submit" class="btn btn-primary">Terang (*)</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form id="" action="{{ url_for('brightness_division') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                <button type="submit" class="btn btn-primary">Gelap (/)</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <form id="" action="{{ url_for('brightness_addition') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                <button type="submit" class="btn btn-primary">Terang (+)</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form id="" action="{{ url_for('brightness_substraction') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                <button type="submit" class="btn btn-primary">Gelap (-)</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <h2>Analisis Gambar</h2>
                 <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('histogram_rgb') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Histogram</button>
-                    </form>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <form id="" action="{{ url_for('histogram_rgb') }}" method="POST" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-primary">Histogram</button>
+                                </form>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
             <div class="col-md-4">
                 <h2>Pemrosesan Gambar</h2>
                 <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
-                    </form>
-                    *melakukan normalisasi histogram dengan menggunakan cdf(cumulative density
-                    function)
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
+                                </form>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
             <div class="col-md-4">
@@ -111,6 +138,30 @@
                 <div class="p-2 flex-fill bd-highlight">
                     <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
                         <button type="submit" class="btn btn-primary">Sharpening</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Segmentation</h2>
+                <div class="p-2 flex-fill bd-highlight">
+                    <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Batas Bawah</th>
+                                    <th>Batas Atas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" name="lower_thres" placeholder="0-255"></td>
+                                    <td><input type="number" name="upper_thres" placeholder="0-255"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><button type="submit" class="btn btn-primary">Thresholding</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </div>

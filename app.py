@@ -21,7 +21,6 @@ def nocache(view):
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '-1'
         return response
-
     return update_wrapper(no_cache, view)
 
 
@@ -60,7 +59,6 @@ def upload():
             os.makedirs(target)
         else:
             os.mkdir(target)
-
     for file in request.files.getlist("file"):
         file.save("static/img/img_now.jpg")
     copyfile("static/img/img_now.jpg", "static/img/img_normal.jpg")
@@ -187,6 +185,15 @@ def histogram_rgb():
         return render_template("histogram.html", file_paths=["img/grey_histogram.jpg"])
     else:
         return render_template("histogram.html", file_paths=["img/red_histogram.jpg", "img/green_histogram.jpg", "img/blue_histogram.jpg"])
+
+
+@app.route("/thresholding", methods=["POST"])
+@nocache
+def thresholding():
+    lower_thres = int(request.form['lower_thres'])
+    upper_thres = int(request.form['upper_thres'])
+    image_processing.threshold(lower_thres, upper_thres)
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 
 if __name__ == '__main__':
