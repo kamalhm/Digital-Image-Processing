@@ -9,24 +9,15 @@ import cv2
 
 def grayscale():
     img = Image.open("static/img/img_now.jpg")
-    img = img.convert("RGBA")
-
     img_arr = np.asarray(img)
     r = img_arr[:, :, 0]
     g = img_arr[:, :, 1]
     b = img_arr[:, :, 2]
-
-    sum_r = np.sum(r)
-    sum_g = np.sum(g)
-    sum_b = np.sum(b)
-    sum_all = sum_r + sum_g + sum_b
-
-    arr_gray = (sum_r / sum_all * r) + \
-        (sum_g / sum_all * g) + (sum_b / sum_all * b)
-
-    new_img = Image.fromarray(arr_gray)
-    new_img = new_img.convert("RGB")
+    new_arr = r.astype(int) + g.astype(int) + b.astype(int)
+    new_arr = (new_arr/3).astype('uint8')
+    new_img = Image.fromarray(new_arr)
     new_img.save("static/img/img_now.jpg")
+    print('new grayscale')
 
 
 def is_grey_scale(img_path):
@@ -42,8 +33,6 @@ def is_grey_scale(img_path):
 
 def zoomin():
     img = Image.open("static/img/img_now.jpg")
-    img = img.convert("RGB")
-
     img_arr = np.asarray(img)
     new_size = ((img_arr.shape[0] * 2),
                 (img_arr.shape[1] * 2), img_arr.shape[2])
@@ -79,7 +68,7 @@ def zoomin():
             new_arr[i, j, 1] = new_g[i][j]
             new_arr[i, j, 2] = new_b[i][j]
 
-    new_arr = np.uint8(new_arr)
+    new_arr = new_arr.astype('uint8')
     new_img = Image.fromarray(new_arr)
     new_img.save("static/img/img_now.jpg")
 
@@ -102,7 +91,6 @@ def zoomout():
                 (g[0] + g[1] + g[2] + g[3]) / 4), int((b[0] + b[1] + b[2] + b[3]) / 4)))
     new_arr = np.uint8(new_arr)
     new_img = Image.fromarray(new_arr)
-    new_img = new_img.convert("RGB")
     new_img.save("static/img/img_now.jpg")
 
 
@@ -222,35 +210,29 @@ def convolution(img, kernel):
 
 def edge_detection():
     img = Image.open("static/img/img_now.jpg")
-    img = img.convert("RGB")
     img_arr = np.asarray(img, dtype=np.int)
     kernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
     new_arr = convolution(img_arr, kernel)
     new_img = Image.fromarray(new_arr)
-    new_img = new_img.convert("RGB")
     new_img.save("static/img/img_now.jpg")
 
 
 def blur():
     img = Image.open("static/img/img_now.jpg")
-    img = img.convert("RGB")
     img_arr = np.asarray(img, dtype=np.int)
     kernel = np.array(
         [[0.0625, 0.125, 0.0625], [0.125, 0.25, 0.125], [0.0625, 0.125, 0.0625]])
     new_arr = convolution(img_arr, kernel)
     new_img = Image.fromarray(new_arr)
-    new_img = new_img.convert("RGB")
     new_img.save("static/img/img_now.jpg")
 
 
 def sharpening():
     img = Image.open("static/img/img_now.jpg")
-    img = img.convert("RGB")
     img_arr = np.asarray(img, dtype=np.int)
     kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
     new_arr = convolution(img_arr, kernel)
     new_img = Image.fromarray(new_arr)
-    new_img = new_img.convert("RGB")
     new_img.save("static/img/img_now.jpg")
 
 
