@@ -32,6 +32,7 @@ def is_grey_scale(img_path):
 
 def zoomin():
     img = Image.open("static/img/img_now.jpg")
+    img = img.convert("RGB")
     img_arr = np.asarray(img)
     new_size = ((img_arr.shape[0] * 2),
                 (img_arr.shape[1] * 2), img_arr.shape[2])
@@ -74,6 +75,7 @@ def zoomin():
 
 def zoomout():
     img = Image.open("static/img/img_now.jpg")
+    img = img.convert("RGB")
     x, y = img.size
     new_arr = Image.new("RGB", (int(x / 2), int(y / 2)))
     r = [0, 0, 0, 0]
