@@ -17,7 +17,6 @@ def grayscale():
     new_arr = (new_arr/3).astype('uint8')
     new_img = Image.fromarray(new_arr)
     new_img.save("static/img/img_now.jpg")
-    print('new grayscale')
 
 
 def is_grey_scale(img_path):
