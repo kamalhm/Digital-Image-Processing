@@ -1,0 +1,5 @@
+Pillow==5.4.1
+Flask==1.0.2
+matplotlib==3.0.2
+numpy==1.16.0
+opencv-python
